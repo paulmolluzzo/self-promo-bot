@@ -21,6 +21,7 @@ const botMethods = {
 		// You may get a text or attachment but not both
 		const messageText = message.text;
 
+		// if there's no message then there's an attachment
 		if (!messageText) {
 			this.sendGifMessage(senderID);
 			return this.sendTextMessage(senderID, `Thanks for the attachment!`);
