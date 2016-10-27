@@ -31,7 +31,7 @@ const botMethods = {
 		}
 
 		if (this.checkMessage('projects', messageText)) {
-			return this.sendGenericMessage(senderID);
+			return this.sendProjectsMessage(senderID);
 		}
 
 		return this.sendTextMessage(senderID, messageText);
@@ -121,7 +121,7 @@ const botMethods = {
 		this.callSendAPI(messageData);
 	},
 
-	sendProjectMessage(recipientId) {
+	sendProjectsMessage(recipientId) {
 		const elements = [{
 			title: `Isaora`,
 			subtitle: `Performance clothing and progressive style.`,
@@ -138,7 +138,7 @@ const botMethods = {
 			}]
 		}, {
 			title: `SVGZus`,
-			subtitle: 'Your Hands, Now in VR',
+			subtitle: `Pop culture coloring book`,
 			item_url: `http://svgz.us/`,
 			image_url: `${config.SERVER_URL}/assets/svgzus.jpg`,
 			buttons: [{
