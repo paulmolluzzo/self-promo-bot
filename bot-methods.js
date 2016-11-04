@@ -137,7 +137,7 @@ const botMethods = {
 				title: 'View Tech Stack',
 				payload: `Shopify and jQuery`
 			}]
-		}, {
+		},{
 			title: `SVGZus`,
 			subtitle: `Pop culture coloring book`,
 			item_url: `http://svgz.us/`,
@@ -149,7 +149,35 @@ const botMethods = {
 			}, {
 				type: 'postback',
 				title: 'View Tech Stack',
-				payload: `Meteor, jQuery, Web Canvas, AWS`
+				payload: `Meteor, jQuery, Web Canvas, and AWS`
+			}]
+		},{
+			title: `Olly Nutrrition`,
+			subtitle: `Pop culture coloring book`,
+			item_url: `https://www.olly.com/`,
+			image_url: `${config.SERVER_URL}/assets/olly.jpg`,
+			buttons: [{
+				type: 'web_url',
+				url: `https://www.olly.com/`,
+				title: 'Pop a Vitamin'
+			}, {
+				type: 'postback',
+				title: 'View Tech Stack',
+				payload: `Rails and jQuery`
+			}]
+		},{
+			title: `Fulcrum Group`,
+			subtitle: `A brochure site with javascript and nifty images`,
+			item_url: `http://the-fulcrum.com/`,
+			image_url: `${config.SERVER_URL}/assets/fulcrum.jpg`,
+			buttons: [{
+				type: 'web_url',
+				url: `http://the-fulcrum.com/`,
+				title: 'Scroll Through'
+			}, {
+				type: 'postback',
+				title: 'View Tech Stack',
+				payload: `Rails and jQuery`
 			}]
 		}];
 
@@ -187,7 +215,7 @@ const botMethods = {
 
 		// When a postback is called, we'll send a message back to the sender to
 		// let them know it was successful
-		this.sendTextMessage(senderID, payload);
+		this.sendTextMessage(senderID, `This site was built with ${payload}`);
 	}
 };
 
