@@ -31,8 +31,16 @@ const botMethods = {
 			return this.sendGifMessage(senderID);
 		}
 
+		if (this.checkMessage('oss|open source', messageText)) {
+			return this.sendProjectsMessage(senderID, ['open-source']);
+		}
+
+		if (this.checkMessage('work', messageText)) {
+			return this.sendProjectsMessage(senderID, ['work']);
+		}
+
 		if (this.checkMessage('projects', messageText)) {
-			return this.sendProjectsMessage(senderID);
+			return this.sendProjectsMessage(senderID, ['work', 'open-source']);
 		}
 
 		return this.sendTextMessage(senderID, messageText);
@@ -122,8 +130,10 @@ const botMethods = {
 		this.callSendAPI(messageData);
 	},
 
-	sendProjectsMessage(recipientId) {
-		const elements = [{
+	sendProjectsMessage(recipientId, projectTypes) {
+		const projectList = [];
+
+		const workProjects = [{
 			title: `Isaora`,
 			subtitle: `Performance clothing and progressive style.`,
 			item_url: `https://www.isaora.com/`,
@@ -137,7 +147,7 @@ const botMethods = {
 				title: 'View Tech Stack',
 				payload: `Shopify and jQuery`
 			}]
-		},{
+		}, {
 			title: `SVGZus`,
 			subtitle: `Pop culture coloring book`,
 			item_url: `http://svgz.us/`,
@@ -145,14 +155,14 @@ const botMethods = {
 			buttons: [{
 				type: 'web_url',
 				url: `http://svgz.us/`,
-				title: 'Color In'
+				title: 'Make Some Color Pop'
 			}, {
 				type: 'postback',
 				title: 'View Tech Stack',
 				payload: `Meteor, jQuery, Web Canvas, and AWS`
 			}]
-		},{
-			title: `Olly Nutrrition`,
+		}, {
+			title: `Olly Nutrition`,
 			subtitle: `Pop culture coloring book`,
 			item_url: `https://www.olly.com/`,
 			image_url: `${config.SERVER_URL}/assets/olly.jpg`,
@@ -165,7 +175,7 @@ const botMethods = {
 				title: 'View Tech Stack',
 				payload: `Rails and jQuery`
 			}]
-		},{
+		}, {
 			title: `Fulcrum Group`,
 			subtitle: `A brochure site with javascript and nifty images`,
 			item_url: `http://the-fulcrum.com/`,
@@ -181,7 +191,59 @@ const botMethods = {
 			}]
 		}];
 
-		this.sendGenericMessage(recipientId, elements);
+		const ossProjects = [{
+			title: `Refined Github`,
+			subtitle: `Chrome extension that simplifies the GitHub interface and adds useful features`,
+			item_url: `https://github.com/sindresorhus/refined-github`,
+			image_url: `${config.SERVER_URL}/assets/refined-github.png`,
+			buttons: [{
+				type: 'web_url',
+				url: `https://github.com/sindresorhus/refined-github`,
+				title: 'View on Github'
+			}, {
+				type: 'web_url',
+				url: `https://chrome.google.com/webstore/detail/refined-github/hlepfoohegkhhmjieoechaddaejaokhf`,
+				title: 'View on Chrome Webstore'
+			}]
+		}, {
+			title: `Pesticide`,
+			subtitle: `Kill your css layout bugs`,
+			item_url: `http://pesticide.io/`,
+			image_url: `${config.SERVER_URL}/assets/pesticide.gif`,
+			buttons: [{
+				type: 'web_url',
+				url: `https://github.com/mrmrs/pesticide`,
+				title: 'View Source'
+			}, {
+				type: 'web_url',
+				url: `https://chrome.google.com/webstore/detail/bblbgcheenepgnnajgfpiicnbbdmmooh`,
+				title: 'View on Chrome Webstore'
+			}]
+		}, {
+			title: `Anatine`,
+			subtitle: `Pristine Twitter App`,
+			item_url: `https://github.com/sindresorhus/anatine`,
+			image_url: `${config.SERVER_URL}/assets/anatine.png`,
+			buttons: [{
+				type: 'web_url',
+				url: `https://github.com/sindresorhus/anatine`,
+				title: 'View Source'
+			}, {
+				type: 'web_url',
+				url: `https://github.com/sindresorhus/anatine#install`,
+				title: 'View Installation Instructions'
+			}]
+		}];
+
+		if (projectTypes.includes('work')) {
+			projectList.push(...workProjects);
+		}
+
+		if (projectTypes.includes('open-source')) {
+			projectList.push(...ossProjects);
+		}
+
+		this.sendGenericMessage(recipientId, projectList);
 	},
 
 	sendGifMessage(recipientId) {
