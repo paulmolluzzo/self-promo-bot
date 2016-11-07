@@ -24,7 +24,8 @@
     "hbs-utils": "0.0.3",
     "morgan": "~1.6.1",
     "request": "^2.75.0",
-    "winston": "^2.2.0",
+    "winston": "^2.3.0",
+    "winston-papertrail": "^1.0.3",
     "xo": "^0.17.0"
   },
   "devDependencies": {
@@ -32,9 +33,12 @@
   },
   "xo": {
     "rules": {
-      "camelcase": ["error", {
-        "properties": "never"
-      }]
+      "camelcase": [
+        "error",
+        {
+          "properties": "never"
+        }
+      ]
     }
   }
 }

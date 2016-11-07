@@ -44,13 +44,21 @@ app.use(bodyParser.urlencoded({
 }));
 
 // winston logging options
-winston.add(winston.transports.File, {
-	filename: 'logs/' + process.env.NODE_ENV + '.log',
-	level: 'info',
-	json: true,
-	timestamp: true
+require('winston-papertrail').Papertrail;
+winston.configure({
+	transports: [
+		new (winston.transports.File)({
+			filename: 'logs/' + process.env.NODE_ENV + '.log',
+			level: 'info',
+			json: true,
+			timestamp: true
+		}),
+		new (winston.transports.Papertrail)({
+				host: process.env.PAPERTRAIL_HOST,
+				port: process.env.PAPERTRAIL_PORT
+		})
+	]
 });
-winston.remove(winston.transports.Console);
 
 if (!(config.APP_SECRET && config.VALIDATION_TOKEN && config.PAGE_ACCESS_TOKEN && config.SERVER_URL)) {
 	winston.error('Missing config values');
