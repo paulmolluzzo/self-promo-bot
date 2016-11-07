@@ -273,7 +273,7 @@ const botMethods = {
 				title: 'View Source'
 			}, {
 				type: 'web_url',
-				url: `https://github.com/sindresorhus/anatine/releases/tag/1.0.0`,
+				url: `https://github.com/sindresorhus/anatine/releases/latest`,
 				title: '➡💻'
 			}]
 		}];
