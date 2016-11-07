@@ -15,6 +15,11 @@ const botMethods = {
 		const recipientID = event.recipient.id;
 		const timeOfMessage = event.timestamp;
 		const message = event.message;
+		const isEcho = message.is_echo;
+
+		if (isEcho) {
+			return;
+		}
 
 		winston.info('Received message for user %d and page %d at %d with message: %s', senderID, recipientID, timeOfMessage, JSON.stringify(message));
 
