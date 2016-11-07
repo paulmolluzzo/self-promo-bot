@@ -43,7 +43,7 @@ const botMethods = {
 		}
 
 		if (this.checkMessage('email', messageText)) {
-			this.sendTextMessage(senderID, `My email address is paul@molluzzo.com`);
+			this.sendTextMessage(senderID, `📧: paul@molluzzo.com`);
 			return this.sendContactInfo(senderID);
 		}
 
@@ -246,11 +246,11 @@ const botMethods = {
 			}, {
 				type: 'web_url',
 				url: `https://chrome.google.com/webstore/detail/refined-github/hlepfoohegkhhmjieoechaddaejaokhf`,
-				title: 'View on Chrome Webstore'
+				title: '➡💻 on Webstore'
 			}]
 		}, {
 			title: `Pesticide`,
-			subtitle: `Kill your css layout bugs`,
+			subtitle: `🐞 Kill your css layout bugs`,
 			item_url: `http://pesticide.io/`,
 			image_url: `${config.SERVER_URL}/assets/pesticide.gif`,
 			buttons: [{
@@ -260,11 +260,11 @@ const botMethods = {
 			}, {
 				type: 'web_url',
 				url: `https://chrome.google.com/webstore/detail/bblbgcheenepgnnajgfpiicnbbdmmooh`,
-				title: 'View on Chrome Webstore'
+				title: '➡💻 on Webstore'
 			}]
 		}, {
 			title: `Anatine`,
-			subtitle: `Pristine Twitter App`,
+			subtitle: `🐤 Pristine Twitter App`,
 			item_url: `https://github.com/sindresorhus/anatine`,
 			image_url: `${config.SERVER_URL}/assets/anatine.png`,
 			buttons: [{
@@ -273,8 +273,8 @@ const botMethods = {
 				title: 'View Source'
 			}, {
 				type: 'web_url',
-				url: `https://github.com/sindresorhus/anatine#install`,
-				title: 'View Installation Instructions'
+				url: `https://github.com/sindresorhus/anatine/releases/tag/1.0.0`,
+				title: '➡💻'
 			}]
 		}];
 
