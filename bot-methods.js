@@ -43,6 +43,10 @@ const botMethods = {
 			return this.sendProjectsMessage(senderID, ['work', 'open-source']);
 		}
 
+		if (this.checkMessage('help', messageText)) {
+			return this.sendHelpMessage(senderID);
+		}
+
 		return this.sendTextMessage(senderID, messageText);
 	},
 
@@ -86,6 +90,24 @@ const botMethods = {
 			},
 			message: {
 				text: messageText
+			}
+		};
+
+		this.callSendAPI(messageData);
+	},
+
+	sendHelpMessage(recipientId) {
+		const messageData = {
+			recipient: {
+				id: recipientId
+			},
+			message: {
+				text: `Need some help, huh? This bot isn't super smart (it's just regex TBH), but you can try sending messages like:
+				* What's your contact info?
+				* Have you done any open source?
+				* Can I see a list of work you've done?
+				* Have any cool projects worth checking out?
+				* What technologies have you used?`
 			}
 		};
 
