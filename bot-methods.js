@@ -363,11 +363,11 @@ const botMethods = {
 			},
 			message: {
 				text: `I've worked with the following tech:
-Front End Web Development - HTML5, CSS3, SASS/SCSS and LESS, JavaScript, Chrome Extensions, Angular 1, jQuery
-Back End Web and CMS - Ruby on Rails, PHP, Node.js, WordPress, Shopify (Liquid), Drupal 7, Meteor
-Servers and PaaS: Apache, Ubuntu 14.04/16.04, CentOS 7, AWS (S3, Route53, Cloudfront, Redshift, IAM), Heroku, Google Analytics, Intercom, Mailchimp
-Source Control - Git, Subversion, and svn-to-git migration
-API Integrations: Facebook, Twitter, USPS/Endicia, Shopify, DCL Shipping, Vimeo`
+Frontend- HTML5, CSS3, SASS/SCSS/LESS, JS, Angular 1, jQuery
+Backend & CMS - Ruby on Rails, PHP, Node, WordPress, Shopify, Drupal 7
+Servers & PaaS: Apache, Ubuntu, AWS (S3, EC2, CloudFront, Redshift, IAM), Heroku
+Source Control - Git, SVN
+APIs: Facebook, Twitter, USPS/Endicia, Vimeo`
 			}
 		};
 
