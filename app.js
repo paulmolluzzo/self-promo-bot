@@ -9,6 +9,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const winston = require('winston');
+const papertrail = require('winston-papertrail').Papertrail; // eslint-disable-line no-unused-vars
 const config = require('./config');
 
 // init express
@@ -44,7 +45,6 @@ app.use(bodyParser.urlencoded({
 }));
 
 // winston logging options
-require('winston-papertrail').Papertrail;
 winston.configure({
 	transports: [
 		new (winston.transports.File)({
@@ -54,8 +54,8 @@ winston.configure({
 			timestamp: true
 		}),
 		new (winston.transports.Papertrail)({
-				host: process.env.PAPERTRAIL_HOST,
-				port: process.env.PAPERTRAIL_PORT
+			host: process.env.PAPERTRAIL_HOST,
+			port: process.env.PAPERTRAIL_PORT
 		})
 	]
 });
