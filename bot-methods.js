@@ -103,11 +103,11 @@ const botMethods = {
 			},
 			message: {
 				text: `Need some help, huh? This bot isn't super smart (it's just regex TBH), but you can try sending messages like:
-				* What's your contact info?
-				* Have you done any open source?
-				* Can I see a list of work you've done?
-				* Have any cool projects worth checking out?
-				* What technologies have you used?`
+* What's your contact info?
+* Have you done any open source?
+* Can I see a list of work you've done?
+* Have any cool projects worth checking out?
+* What technologies have you used?`
 			}
 		};
 
