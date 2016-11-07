@@ -37,6 +37,7 @@ const botMethods = {
 		}
 
 		if (this.checkMessage('contact', messageText)) {
+			this.sendTextMessage(senderID, `My email address is paul@molluzzo.com`);
 			this.sendContactInfo(senderID);
 			return this.sendWebPresence(senderID);
 		}
@@ -295,11 +296,6 @@ const botMethods = {
 						template_type: 'button',
 						text: message,
 						buttons: [
-							{
-								type: `web_url`,
-								url: `mailto:paul@molluzzo.com`,
-								title: `Email`
-							},
 							{
 								type: `web_url`,
 								url: `https://twitter.com/paulmolluzzo`,
