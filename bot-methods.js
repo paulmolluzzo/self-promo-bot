@@ -44,7 +44,7 @@ const botMethods = {
 
 		if (this.checkMessage('email', messageText)) {
 			this.sendTextMessage(senderID, `My email address is paul@molluzzo.com`);
-			return this.sendContactInfo(senderID, `Or we can connect one of these ways:`);
+			return this.sendContactInfo(senderID);
 		}
 
 		if (this.checkMessage('oss|open source', messageText)) {
@@ -284,7 +284,7 @@ const botMethods = {
 		this.sendGenericMessage(recipientId, projectList);
 	},
 
-	sendContactInfo(recipientId, message = `How do you want to connect?`) {
+	sendContactInfo(recipientId, message = `Or we can connect one of these ways:`) {
 		const messageData = {
 			recipient: {
 				id: recipientId
