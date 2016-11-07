@@ -36,6 +36,16 @@ const botMethods = {
 			return this.sendGifMessage(senderID);
 		}
 
+		if (this.checkMessage('contact', messageText)) {
+			this.sendContactInfo(senderID);
+			return this.sendWebPresence(senderID);
+		}
+
+		if (this.checkMessage('email', messageText)) {
+			this.sendTextMessage(senderID, `My email address is paul@molluzzo.com`);
+			return this.sendContactInfo(senderID, `Or we can connect one of these ways:`);
+		}
+
 		if (this.checkMessage('oss|open source', messageText)) {
 			return this.sendProjectsMessage(senderID, ['open-source']);
 		}
@@ -271,6 +281,78 @@ const botMethods = {
 		}
 
 		this.sendGenericMessage(recipientId, projectList);
+	},
+
+	sendContactInfo(recipientId, message = `How do you want to connect?`) {
+		const messageData = {
+			recipient: {
+				id: recipientId
+			},
+			message: {
+				attachment: {
+					type: 'template',
+					payload: {
+						template_type: 'button',
+						text: message,
+						buttons: [
+							{
+								type: `web_url`,
+								url: `mailto:paul@molluzzo.com`,
+								title: `Email`
+							},
+							{
+								type: `web_url`,
+								url: `https://twitter.com/paulmolluzzo`,
+								title: `Twitter`
+							},
+							{
+								type: `phone_number`,
+								payload: config.PHONE_NUMBER,
+								title: `Call Me`
+							}
+						]
+					}
+				}
+			}
+		};
+
+		this.callSendAPI(messageData);
+	},
+
+	sendWebPresence(recipientId, message = `You can also view more info about me here:`) {
+		const messageData = {
+			recipient: {
+				id: recipientId
+			},
+			message: {
+				attachment: {
+					type: 'template',
+					payload: {
+						template_type: 'button',
+						text: message,
+						buttons: [
+							{
+								type: `web_url`,
+								url: `https://paul.molluzzo.com`,
+								title: `My Website`
+							},
+							{
+								type: `web_url`,
+								url: `https://github.com/paulmolluzzo`,
+								title: `GitHub`
+							},
+							{
+								type: `web_url`,
+								url: `https://linkedin.com/in/paulmolluzzo`,
+								title: `LinkedIn`
+							}
+						]
+					}
+				}
+			}
+		};
+
+		this.callSendAPI(messageData);
 	},
 
 	sendGifMessage(recipientId) {
