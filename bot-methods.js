@@ -1,7 +1,7 @@
 'use strict';
 
 const winston = require('winston');
-const request = require('request');
+const rp = require('request-promise-native');
 const config = require('./config');
 
 const botMethods = {
@@ -28,8 +28,9 @@ const botMethods = {
 
 		// if there's no message then there's an attachment
 		if (!messageText) {
-			this.sendGifMessage(senderID);
-			return this.sendTextMessage(senderID, `Thanks for the attachment!`);
+			return this.sendGifMessage(senderID).then(() => {
+				return this.sendTextMessage(senderID, `Thanks for the attachment!`);
+			});
 		}
 
 		if (this.checkMessage('gif', messageText)) {
@@ -37,19 +38,23 @@ const botMethods = {
 		}
 
 		if (this.checkMessage('contact', messageText)) {
-			this.sendTextMessage(senderID, `My email address is paul@molluzzo.com`);
-			this.sendContactInfo(senderID);
-			return this.sendWebPresence(senderID);
+			return this.sendTextMessage(senderID, `My email address is paul@molluzzo.com`).then(() => {
+				return this.sendContactInfo(senderID);
+			}).then(() => {
+				return this.sendWebPresence(senderID);
+			});
 		}
 
 		if (this.checkMessage('email', messageText)) {
-			this.sendTextMessage(senderID, `📧: paul@molluzzo.com`);
-			return this.sendContactInfo(senderID);
+			return this.sendTextMessage(senderID, `📧: paul@molluzzo.com`).then(() => {
+				return this.sendContactInfo(senderID);
+			});
 		}
 
 		if (this.checkMessage('tech|stack', messageText)) {
-			this.sendTechnologiesMessage(senderID);
-			return this.sendTextMessage(senderID, `It looks kind of crazy when I write it all out like that! 😅`);
+			return this.sendTechnologiesMessage(senderID).then(() => {
+				return this.sendTextMessage(senderID, `It looks kind of crazy when I write it all out like that! 😅`);
+			});
 		}
 
 		if (this.checkMessage('oss|open source', messageText)) {
@@ -114,7 +119,7 @@ const botMethods = {
 			}
 		};
 
-		this.callSendAPI(messageData);
+		return this.callSendAPI(messageData);
 	},
 
 	sendHelpMessage(recipientId) {
@@ -132,25 +137,22 @@ const botMethods = {
 			}
 		};
 
-		this.callSendAPI(messageData);
+		return this.callSendAPI(messageData);
 	},
 
 	callSendAPI(messageData) {
-		request({
+		return rp({
 			uri: 'https://graph.facebook.com/v2.6/me/messages',
 			qs: {access_token: config.PAGE_ACCESS_TOKEN},
 			method: 'POST',
 			json: messageData
+		}).then(body => {
+			const recipientId = body.recipient_id;
+			const messageId = body.message_id;
 
-		}, (error, response, body) => {
-			if (!error && response.statusCode === 200) {
-				const recipientId = body.recipient_id;
-				const messageId = body.message_id;
-
-				winston.info('Successfully sent generic message with id %s to recipient %s', messageId, recipientId);
-			} else {
-				winston.error('Unable to send message.', response, error);
-			}
+			winston.info('Successfully sent generic message with id %s to recipient %s', messageId, recipientId);
+		}).catch(err => {
+			winston.error('Unable to send message.', err);
 		});
 	},
 
@@ -170,7 +172,7 @@ const botMethods = {
 			}
 		};
 
-		this.callSendAPI(messageData);
+		return this.callSendAPI(messageData);
 	},
 
 	sendProjectsMessage(recipientId, projectTypes) {
@@ -317,7 +319,7 @@ const botMethods = {
 			}
 		};
 
-		this.callSendAPI(messageData);
+		return this.callSendAPI(messageData);
 	},
 
 	sendWebPresence(recipientId, message = `You can also view more info about me here:`) {
@@ -353,7 +355,7 @@ const botMethods = {
 			}
 		};
 
-		this.callSendAPI(messageData);
+		return this.callSendAPI(messageData);
 	},
 
 	sendTechnologiesMessage(recipientId) {
@@ -371,7 +373,7 @@ APIs: Facebook, Twitter, USPS/Endicia, Vimeo`
 			}
 		};
 
-		this.callSendAPI(messageData);
+		return this.callSendAPI(messageData);
 	},
 
 	sendGifMessage(recipientId) {
@@ -389,7 +391,7 @@ APIs: Facebook, Twitter, USPS/Endicia, Vimeo`
 			}
 		};
 
-		this.callSendAPI(messageData);
+		return this.callSendAPI(messageData);
 	},
 
 	receivedPostback(event) {
