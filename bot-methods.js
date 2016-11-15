@@ -2,6 +2,7 @@
 
 const winston = require('winston');
 const rp = require('request-promise-native');
+const promiseDelay = require('promise-delay');
 const config = require('./config');
 
 const botMethods = {
@@ -38,10 +39,13 @@ const botMethods = {
 		}
 
 		if (this.checkMessage('contact', messageText)) {
-			return this.sendTextMessage(senderID, `My email address is paul@molluzzo.com`).then(() => {
-				return this.sendContactInfo(senderID);
-			}).then(() => {
-				return this.sendWebPresence(senderID);
+			return this.sendTextMessage(senderID, `My email address is paul@molluzzo.com`, 3000).then(() => {
+				this.sendContactInfo(senderID, undefined, 3000).then(() => {
+					this.sendWebPresence(senderID, undefined, 3000);
+				});
+			}).catch(err => {
+				winston.error(err);
+				return this.sendTextMessage(senderID, `I think you broke something! 😲 Try again or ask for help.`);
 			});
 		}
 
@@ -109,7 +113,30 @@ const botMethods = {
 		winston.info('All messages before %d were delivered.', watermark);
 	},
 
-	sendTextMessage(recipientId, messageText) {
+	sendSenderAction(recipientId, actionType) {
+		const messageData = {
+			recipient: {
+				id: recipientId
+			},
+			sender_action: actionType
+		};
+
+		return this.callSendAPI(messageData);
+	},
+
+	sendMarkSeen(recipientId) {
+		return this.sendSenderAction(recipientId, 'mark_seen');
+	},
+
+	sendTypingOn(recipientId) {
+		return this.sendSenderAction(recipientId, 'typing_on');
+	},
+
+	sendTypingOff(recipientId) {
+		return this.sendSenderAction(recipientId, 'typing_off');
+	},
+
+	sendTextMessage(recipientId, messageText, delay = 0) {
 		const messageData = {
 			recipient: {
 				id: recipientId
@@ -119,7 +146,9 @@ const botMethods = {
 			}
 		};
 
-		return this.callSendAPI(messageData);
+		return this.sendTypingOn(recipientId).then(() => {
+			return promiseDelay(delay, this.callSendAPI(messageData));
+		});
 	},
 
 	sendHelpMessage(recipientId) {
@@ -291,7 +320,7 @@ const botMethods = {
 		this.sendGenericMessage(recipientId, projectList);
 	},
 
-	sendContactInfo(recipientId, message = `Or we can connect one of these ways:`) {
+	sendContactInfo(recipientId, message = `Or we can connect one of these ways:`, delay = 0) {
 		const messageData = {
 			recipient: {
 				id: recipientId
@@ -319,10 +348,12 @@ const botMethods = {
 			}
 		};
 
-		return this.callSendAPI(messageData);
+		return this.sendTypingOn(recipientId).then(() => {
+			return promiseDelay(delay, this.callSendAPI(messageData));
+		});
 	},
 
-	sendWebPresence(recipientId, message = `You can also view more info about me here:`) {
+	sendWebPresence(recipientId, message = `You can also view more info about me here:`, delay = 0) {
 		const messageData = {
 			recipient: {
 				id: recipientId
@@ -355,7 +386,9 @@ const botMethods = {
 			}
 		};
 
-		return this.callSendAPI(messageData);
+		return this.sendTypingOn(recipientId).then(() => {
+			return promiseDelay(delay, this.callSendAPI(messageData));
+		});
 	},
 
 	sendTechnologiesMessage(recipientId) {

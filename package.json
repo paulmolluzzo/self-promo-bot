@@ -23,6 +23,7 @@
     "express-handlebars": "^3.0.0",
     "hbs-utils": "0.0.3",
     "morgan": "~1.6.1",
+    "promise-delay": "^2.1.0",
     "request": "^2.75.0",
     "request-promise-native": "^1.0.3",
     "winston": "^2.3.0",
