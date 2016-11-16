@@ -62,15 +62,15 @@ const botMethods = {
 		}
 
 		if (this.checkMessage('oss|open source', messageText)) {
-			return this.sendProjectsMessage(senderID, ['open-source']);
+			return this.sendProjectsMessage(senderID, ['open-source'], 3000);
 		}
 
 		if (this.checkMessage('work', messageText)) {
-			return this.sendProjectsMessage(senderID, ['work']);
+			return this.sendProjectsMessage(senderID, ['work'], 3000);
 		}
 
 		if (this.checkMessage('projects', messageText)) {
-			return this.sendProjectsMessage(senderID, ['work', 'open-source']);
+			return this.sendProjectsMessage(senderID, ['work', 'open-source'], 3000);
 		}
 
 		if (this.checkMessage('help', messageText)) {
@@ -185,7 +185,7 @@ const botMethods = {
 		});
 	},
 
-	sendGenericMessage(recipientId, elements) {
+	sendGenericMessage(recipientId, elements, delay = 0) {
 		const messageData = {
 			recipient: {
 				id: recipientId
@@ -201,10 +201,12 @@ const botMethods = {
 			}
 		};
 
-		return this.callSendAPI(messageData);
+		return this.sendTypingOn(recipientId).then(() => {
+			return promiseDelay(delay, this.callSendAPI(messageData));
+		});
 	},
 
-	sendProjectsMessage(recipientId, projectTypes) {
+	sendProjectsMessage(recipientId, projectTypes, delay = 0) {
 		const projectList = [];
 
 		const workProjects = [{
@@ -317,7 +319,7 @@ const botMethods = {
 			projectList.push(...ossProjects);
 		}
 
-		this.sendGenericMessage(recipientId, projectList);
+		this.sendGenericMessage(recipientId, projectList, delay);
 	},
 
 	sendContactInfo(recipientId, message = `Or we can connect one of these ways:`, delay = 0) {
