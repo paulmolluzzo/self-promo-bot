@@ -50,8 +50,8 @@ const botMethods = {
 		}
 
 		if (this.checkMessage('email', messageText)) {
-			return this.sendTextMessage(senderID, `📧: paul@molluzzo.com`).then(() => {
-				return this.sendContactInfo(senderID);
+			return this.sendTextMessage(senderID, `📧: paul@molluzzo.com`, 1000).then(() => {
+				return this.sendContactInfo(senderID, undefined, 3000);
 			});
 		}
 
