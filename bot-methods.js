@@ -38,7 +38,7 @@ const botMethods = {
 			return this.sendGifMessage(senderID);
 		}
 
-		if (this.checkMessage('contact', messageText)) {
+		if (this.checkMessage('contact|reach', messageText)) {
 			return this.sendTextMessage(senderID, `My email address is paul@molluzzo.com`, 3000).then(() => {
 				this.sendContactInfo(senderID, undefined, 3000).then(() => {
 					this.sendWebPresence(senderID, undefined, 3000);
@@ -62,19 +62,19 @@ const botMethods = {
 		}
 
 		if (this.checkMessage('oss|open source', messageText)) {
-			return this.sendTextMessage(senderID, `I've built or contributed to a bunch of cool open source things. Here are a few worth poking at:`, 1000).then(() => {
+			return this.sendTextMessage(senderID, `I love OSS! I've built or contributed to a bunch of cool open source things, and try to keep my eyes open for new stuff the community is building. If you have a neat project LMK! Here are a few worth poking at:`, 2000).then(() => {
 				return this.sendProjectsMessage(senderID, ['open-source'], 3000);
 			});
 		}
 
 		if (this.checkMessage('work', messageText)) {
-			return this.sendTextMessage(senderID, `I have a bunch of paid work that I'm proud of. Here are some that come to mind:`, 1000).then(() => {
+			return this.sendTextMessage(senderID, `I have a bunch of paid work that I'm proud of (and I'm always looking for new projects 😉). Here are some that come to mind:`, 2000).then(() => {
 				return this.sendProjectsMessage(senderID, ['work'], 3000);
 			});
 		}
 
 		if (this.checkMessage('projects', messageText)) {
-			return this.sendTextMessage(senderID, `I have a bunch of paid work that I'm proud of. Here are some that come to mind:`, 1000).then(() => {
+			return this.sendTextMessage(senderID, `Here's a mix of paid work and OSS projects that you might like. LMK if any stand out for you.`, 2000).then(() => {
 				return this.sendProjectsMessage(senderID, ['work', 'open-source'], 3000);
 			});
 		}
