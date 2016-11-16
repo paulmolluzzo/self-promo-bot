@@ -41,7 +41,7 @@ app.post('/webhook', (req, res) => {
 				} else if (messagingEvent.postback) {
 					botMethods.receivedPostback(messagingEvent);
 				} else {
-					winston.warn('Webhook received unknown messagingEvent for page %d: %s', pageID, messagingEvent);
+					winston.warn('Webhook received unknown messagingEvent', messagingEvent);
 				}
 			});
 		});
