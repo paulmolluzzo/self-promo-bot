@@ -28,7 +28,6 @@ app.post('/webhook', (req, res) => {
 	if (data.object === 'page') {
 		// loop all entries
 		data.entry.forEach(pageEntry => {
-			const pageID = pageEntry.id;
 
 			// Iterate over each messaging event
 			pageEntry.messaging.forEach(messagingEvent => {

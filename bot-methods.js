@@ -22,8 +22,6 @@ const botMethods = {
 			return;
 		}
 
-		winston.info('Received message for user %d and page %d at %d with message: %s', senderID, recipientID, timeOfMessage, JSON.stringify(message));
-
 		// You may get a text or attachment but not both
 		const messageText = message.text;
 
@@ -33,6 +31,8 @@ const botMethods = {
 				return this.sendTextMessage(senderID, `Thanks for the attachment!`);
 			});
 		}
+
+		winston.info('Received message for user %d and page %d at %d with message: %s', senderID, recipientID, timeOfMessage, messageText);
 
 		if (this.checkMessage('gif', messageText)) {
 			return this.sendGifMessage(senderID);
@@ -85,7 +85,7 @@ const botMethods = {
 			return this.sendHelpMessage(senderID, `Hey is for horses. 😂`, 1000);
 		}
 
-		winston.warn('Unhandled message: %s'. messageText);
+		winston.warn('Unhandled message: %s', messageText);
 		return this.sendTextMessage(senderID, `That's a new one. I'll ask Paul to add an answer. In the meantime maybe ask for help?`, 1000);
 	},
 
@@ -188,7 +188,7 @@ const botMethods = {
 			const recipientId = body.recipient_id;
 			const messageId = body.message_id;
 
-			winston.info('Successfully sent generic message with id %s to recipient %s', messageId, recipientId);
+			winston.info('Successfully sent %s message with id %s to recipient %s', messageData.message.attachment.type, messageId, recipientId);
 		}).catch(err => {
 			winston.error('Unable to send message.', err);
 		});
