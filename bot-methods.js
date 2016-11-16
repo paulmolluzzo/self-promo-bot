@@ -78,11 +78,11 @@ const botMethods = {
 		}
 
 		if (this.checkMessage('sign|astrology|astrological|zodiac|Aries|Taurus|Gemini|Cancer|Leo|Virgo|Libra|Scorpio|Sagittarius|Capricorn|Aquarius|Pisces', messageText)) {
-			return this.sendHelpMessage(senderID, `I'm on the cusp of Leo and Virgo. 😉`, 1000);
+			return this.sendTextMessage(senderID, `I'm on the cusp of Leo and Virgo. 😉`, 1000);
 		}
 
 		if (this.checkMessage('hey', messageText)) {
-			return this.sendHelpMessage(senderID, `Hey is for horses. 😂`, 1000);
+			return this.sendTextMessage(senderID, `Hey is for horses. 😂`, 1000);
 		}
 
 		winston.warn('Unhandled message: %s', messageText);
