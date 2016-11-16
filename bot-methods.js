@@ -81,7 +81,12 @@ const botMethods = {
 			return this.sendHelpMessage(senderID, `I'm on the cusp of Leo and Virgo. 😉`, 1000);
 		}
 
-		return this.sendTextMessage(senderID, messageText);
+		if (this.checkMessage('hey', messageText)) {
+			return this.sendHelpMessage(senderID, `Hey is for horses. 😂`, 1000);
+		}
+
+		winston.warn('Unhandled message: %s'. messageText);
+		return this.sendTextMessage(senderID, `That's a new one. I'll ask Paul to add an answer. In the meantime maybe ask for help?`, 1000);
 	},
 
 	receivedAuthentication(event) {
