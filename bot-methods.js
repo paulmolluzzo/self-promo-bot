@@ -77,6 +77,10 @@ const botMethods = {
 			return this.sendHelpMessage(senderID);
 		}
 
+		if (this.checkMessage('sign|astrology|astrological|zodiac|Aries|Taurus|Gemini|Cancer|Leo|Virgo|Libra|Scorpio|Sagittarius|Capricorn|Aquarius|Pisces', messageText)) {
+			return this.sendHelpMessage(senderID, `I'm on the cusp of Leo and Virgo. 😉`, 1000);
+		}
+
 		return this.sendTextMessage(senderID, messageText);
 	},
 
