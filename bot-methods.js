@@ -251,7 +251,7 @@ const botMethods = {
 			buttons: [{
 				type: 'web_url',
 				url: `https://www.isaora.com/`,
-				title: 'Buy Stuff'
+				title: 'Spend that 💰'
 			}, {
 				type: 'postback',
 				title: 'View Tech Stack',
