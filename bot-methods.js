@@ -56,8 +56,8 @@ const botMethods = {
 		}
 
 		if (this.checkMessage('tech|stack', messageText)) {
-			return this.sendTechnologiesMessage(senderID).then(() => {
-				return this.sendTextMessage(senderID, `It looks kind of crazy when I write it all out like that! 😅`);
+			return this.sendTechnologiesMessage(senderID, 3000).then(() => {
+				return this.sendTextMessage(senderID, `It looks kind of crazy when I write it all out like that! 😅`, 1000);
 			});
 		}
 
@@ -391,7 +391,7 @@ const botMethods = {
 		});
 	},
 
-	sendTechnologiesMessage(recipientId) {
+	sendTechnologiesMessage(recipientId, delay = 0) {
 		const messageData = {
 			recipient: {
 				id: recipientId
@@ -406,7 +406,9 @@ APIs: Facebook, Twitter, USPS/Endicia, Vimeo`
 			}
 		};
 
-		return this.callSendAPI(messageData);
+		return this.sendTypingOn(recipientId).then(() => {
+			return promiseDelay(delay, this.callSendAPI(messageData));
+		});
 	},
 
 	sendGifMessage(recipientId) {
