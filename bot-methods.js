@@ -309,7 +309,7 @@ const botMethods = {
 			buttons: [{
 				type: 'web_url',
 				url: `https://github.com/sindresorhus/refined-github`,
-				title: 'View on Github'
+				title: 'View Source'
 			}, {
 				type: 'web_url',
 				url: `https://chrome.google.com/webstore/detail/refined-github/hlepfoohegkhhmjieoechaddaejaokhf`,
