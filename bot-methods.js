@@ -230,6 +230,20 @@ const botMethods = {
 		const projectList = [];
 
 		const workProjects = [{
+			title: `SoftBank Robotics Developer Portal`,
+			subtitle: `Global portal with developer documentation and forums`,
+			item_url: `https://developer.softbankrobotics.com/`,
+			image_url: `${config.SERVER_URL}/assets/sbr.jpg`,
+			buttons: [{
+				type: 'web_url',
+				url: `https://developer.softbankrobotics.com/`,
+				title: 'Build for Pepper'
+			}, {
+				type: 'postback',
+				title: 'View Tech Stack',
+				payload: `PHP (Drupal 7) and jQuery, with custom integrations for PingOne Identity mgmt and Meetup.com.`
+			}]
+		}, {
 			title: `Isaora`,
 			subtitle: `Performance clothing and progressive style.`,
 			item_url: `https://www.isaora.com/`,
