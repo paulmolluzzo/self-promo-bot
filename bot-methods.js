@@ -62,15 +62,21 @@ const botMethods = {
 		}
 
 		if (this.checkMessage('oss|open source', messageText)) {
-			return this.sendProjectsMessage(senderID, ['open-source'], 3000);
+			return this.sendTextMessage(senderID, `I've built or contributed to a bunch of cool open source things. Here are a few worth poking at:`, 1000).then(() => {
+				return this.sendProjectsMessage(senderID, ['open-source'], 3000);
+			});
 		}
 
 		if (this.checkMessage('work', messageText)) {
-			return this.sendProjectsMessage(senderID, ['work'], 3000);
+			return this.sendTextMessage(senderID, `I have a bunch of paid work that I'm proud of. Here are some that come to mind:`, 1000).then(() => {
+				return this.sendProjectsMessage(senderID, ['work'], 3000);
+			});
 		}
 
 		if (this.checkMessage('projects', messageText)) {
-			return this.sendProjectsMessage(senderID, ['work', 'open-source'], 3000);
+			return this.sendTextMessage(senderID, `I have a bunch of paid work that I'm proud of. Here are some that come to mind:`, 1000).then(() => {
+				return this.sendProjectsMessage(senderID, ['work', 'open-source'], 3000);
+			});
 		}
 
 		if (this.checkMessage('help', messageText)) {
