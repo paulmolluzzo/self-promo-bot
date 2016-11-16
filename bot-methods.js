@@ -187,8 +187,13 @@ const botMethods = {
 		}).then(body => {
 			const recipientId = body.recipient_id;
 			const messageId = body.message_id;
+			let messageType = messageData.sender_action || 'text';
 
-			winston.info('Successfully sent %s message with id %s to recipient %s', messageData.message.attachment.type, messageId, recipientId);
+			if (messageData.message !== undefined && messageData.message.attachment !== undefined) {
+				messageType = messageData.message.attachment.type;
+			}
+
+			winston.info('Successfully sent %s message with id %s to recipient %s', messageType, messageId, recipientId);
 		}).catch(err => {
 			winston.error('Unable to send message.', err);
 		});
