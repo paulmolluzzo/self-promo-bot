@@ -55,7 +55,7 @@ const botMethods = {
 			});
 		}
 
-		if (this.checkMessage('tech|stack', messageText)) {
+		if (this.checkMessage('tech|stack|software', messageText)) {
 			return this.sendTechnologiesMessage(senderID, 3000).then(() => {
 				return this.sendTextMessage(senderID, `It looks kind of crazy when I write it all out like that! 😅`, 1000);
 			});
@@ -434,11 +434,11 @@ const botMethods = {
 			},
 			message: {
 				text: `I've worked with the following tech:
-Frontend- HTML5, CSS3, SASS/SCSS/LESS, JS, Angular 1, jQuery
-Backend & CMS - Ruby on Rails, PHP, Node, WordPress, Shopify, Drupal 7
-Servers & PaaS: Apache, Ubuntu, AWS (S3, EC2, CloudFront, Redshift, IAM), Heroku
-Source Control - Git, SVN
-APIs: Facebook, Twitter, USPS/Endicia, Vimeo`
+* Frontend- HTML5, CSS3, SASS/SCSS/LESS, JS, Angular 1, jQuery
+* Backend & CMS - Ruby on Rails, PHP, Node, WordPress, Shopify, Drupal 7
+* Servers & PaaS: Apache, Ubuntu, AWS (S3, EC2, CloudFront, IAM), Heroku
+* Source Control - Git, SVN
+* APIs: Facebook, Twitter, USPS/Endicia, Vimeo`
 			}
 		};
 
