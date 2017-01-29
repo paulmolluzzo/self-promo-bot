@@ -34,35 +34,35 @@ app.use(logger('dev'));
 
 // body parser
 app.use(bodyParser.json({
-	extended: false,
-	parameterLimit: 10000,
-	limit: 1024 * 1024 * 10
+  extended: false,
+  parameterLimit: 10000,
+  limit: 1024 * 1024 * 10
 }));
 app.use(bodyParser.urlencoded({
-	extended: false,
-	parameterLimit: 10000,
-	limit: 1024 * 1024 * 10
+  extended: false,
+  parameterLimit: 10000,
+  limit: 1024 * 1024 * 10
 }));
 
 // winston logging options
 winston.configure({
-	transports: [
-		new (winston.transports.File)({
-			filename: 'logs/' + process.env.NODE_ENV + '.log',
-			level: 'info',
-			json: true,
-			timestamp: true
-		}),
-		new (winston.transports.Papertrail)({
-			host: process.env.PAPERTRAIL_HOST,
-			port: process.env.PAPERTRAIL_PORT
-		})
-	]
+  transports: [
+    new (winston.transports.File)({
+      filename: 'logs/' + process.env.NODE_ENV + '.log',
+      level: 'info',
+      json: true,
+      timestamp: true
+    }),
+    new (winston.transports.Papertrail)({
+      host: process.env.PAPERTRAIL_HOST,
+      port: process.env.PAPERTRAIL_PORT
+    })
+  ]
 });
 
 if (!(config.APP_SECRET && config.VALIDATION_TOKEN && config.PAGE_ACCESS_TOKEN && config.SERVER_URL)) {
-	winston.error('Missing config values');
-	throw new Error('Missing config values');
+  winston.error('Missing config values');
+  throw new Error('Missing config values');
 }
 
 module.exports = app;
