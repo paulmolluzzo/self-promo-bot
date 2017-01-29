@@ -17,16 +17,28 @@ const botMethods = {
     const timeOfMessage = event.timestamp;
     const message = event.message;
     const isEcho = message.is_echo;
+    const msgSticker = message.sticker_id;
+    const likeStickerID = 369239263222822;
 
     if (isEcho) {
       return;
     }
-
     // You may get a text or attachment but not both
     const messageText = message.text;
 
     // if there's no message then there's an attachment
     if (!messageText) {
+
+      if (msgSticker === likeStickerID) {
+        return this.sendTextMessage(senderID, `Aww, I like you too. 👍`);
+      }
+
+      message.attachments.forEach(attachment => {
+        if (attachment.payload && attachment.payload.url) {
+          winston.info('Received message with attachment for user %d and page %d at %d. Link:', senderID, recipientID, timeOfMessage, attachment.payload.url);
+        }
+      })
+
       return this.sendGifMessage(senderID).then(() => {
         return this.sendTextMessage(senderID, `Thanks for the attachment!`);
       });
