@@ -22,10 +22,10 @@ const botMethods = {
       return;
     }
 
-		// You may get a text or attachment but not both
+    // You may get a text or attachment but not both
     const messageText = message.text;
 
-		// if there's no message then there's an attachment
+    // if there's no message then there's an attachment
     if (!messageText) {
       return this.sendGifMessage(senderID).then(() => {
         return this.sendTextMessage(senderID, `Thanks for the attachment!`);
@@ -100,17 +100,17 @@ const botMethods = {
     const recipientID = event.recipient.id;
     const timeOfAuth = event.timestamp;
 
-		// The 'ref' field is set in the 'Send to Messenger' plugin, in the 'data-ref'
-		// The developer can set this to an arbitrary value to associate the
-		// authentication callback with the 'Send to Messenger' click event. This is
-		// a way to do account linking when the user clicks the 'Send to Messenger'
-		// plugin.
+    // The 'ref' field is set in the 'Send to Messenger' plugin, in the 'data-ref'
+    // The developer can set this to an arbitrary value to associate the
+    // authentication callback with the 'Send to Messenger' click event. This is
+    // a way to do account linking when the user clicks the 'Send to Messenger'
+    // plugin.
     const passThroughParam = event.optin.ref;
 
     winston.info('Received authentication for user %d and page %d with pass through param %s at %d', senderID, recipientID, passThroughParam, timeOfAuth);
 
-		// When an authentication is received, we'll send a message back to the sender
-		// to let them know it was successful.
+    // When an authentication is received, we'll send a message back to the sender
+    // to let them know it was successful.
     this.sendTextMessage(senderID, 'Authentication successful');
   },
 
@@ -230,6 +230,15 @@ const botMethods = {
     const projectList = [];
 
     const workProjects = [{
+      title: `Origins Holiday Treasure Hunt`,
+      subtitle: `Web mini game built with Angular and ThreeJS`,
+      image_url: `${config.SERVER_URL}/assets/origins.gif`,
+      buttons: [{
+        type: 'postback',
+        title: 'View Tech Stack',
+        payload: `Angular, Three.js (WebGL), and Rails 4.`
+      }]
+    }, {
       title: `SoftBank Robotics Developer Portal`,
       subtitle: `Global portal with developer documentation and forums`,
       item_url: `https://developer.softbankrobotics.com/`,
@@ -470,14 +479,14 @@ const botMethods = {
     const recipientID = event.recipient.id;
     const timeOfPostback = event.timestamp;
 
-		// The 'payload' param is a developer-defined field which is set in a postback
-		// button for Structured Messages.
+    // The 'payload' param is a developer-defined field which is set in a postback
+    // button for Structured Messages.
     const payload = event.postback.payload;
 
     winston.info('Received postback for user %d and page %d with payload %s at %d', senderID, recipientID, payload, timeOfPostback);
 
-		// When a postback is called, we'll send a message back to the sender to
-		// let them know it was successful
+    // When a postback is called, we'll send a message back to the sender to
+    // let them know it was successful
     this.sendTextMessage(senderID, `This site was built with ${payload}`);
   }
 };
