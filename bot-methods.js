@@ -28,7 +28,6 @@ const botMethods = {
 
     // if there's no message then there's an attachment
     if (!messageText) {
-
       if (msgSticker === likeStickerID) {
         return this.sendTextMessage(senderID, `Aww, I like you too. 👍`);
       }
@@ -37,7 +36,7 @@ const botMethods = {
         if (attachment.payload && attachment.payload.url) {
           winston.info('Received message with attachment for user %d and page %d at %d. Link:', senderID, recipientID, timeOfMessage, attachment.payload.url);
         }
-      })
+      });
 
       return this.sendGifMessage(senderID).then(() => {
         return this.sendTextMessage(senderID, `Thanks for the attachment!`);
@@ -192,26 +191,26 @@ const botMethods = {
 * Can I see a list of work you've done?
 * Have any cool projects worth checking out?
 * What technologies have you used?`,
-        quick_replies:[{
-          content_type:'text',
-          title:'Get contact info',
-          payload:`Get contact info`
+        quick_replies: [{
+          content_type: 'text',
+          title: 'Get contact info',
+          payload: `Get contact info`
         },
-        {
-          content_type:'text',
-          title:'See OSS work',
-          payload:`See OSS work`
-        },
-        {
-          content_type:'text',
-          title:'See paid work',
-          payload:`See paid work`
-        },
-        {
-          content_type:'text',
-          title:`Tech I've worked with`,
-          payload:`Tech I've worked with`
-        }]
+          {
+            content_type: 'text',
+            title: 'See OSS work',
+            payload: `See OSS work`
+          },
+          {
+            content_type: 'text',
+            title: 'See paid work',
+            payload: `See paid work`
+          },
+          {
+            content_type: 'text',
+            title: `Tech I've worked with`,
+            payload: `Tech I've worked with`
+          }]
       }
     };
 
@@ -395,7 +394,6 @@ const botMethods = {
   },
 
   sendContactInfo(recipientId, message = `Here you go.`, delay = 0, infoTypesArray = ['phone', 'twitter']) {
-
     const infoTypesButtons = [];
 
     if (infoTypesArray.indexOf('phone') !== -1) {
