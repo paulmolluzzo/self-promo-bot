@@ -1,32 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Bot</title>
+  <meta charset="utf-8">
+  <title>Paul's Pet Chatbot</title>
+  <style type="text/css">
+    * { box-sizing: border-box; font-family: monospace;}
+    html { background-color: #ccc; font-size: 16px; }
+    body { background: url('/assets/bot.png') no-repeat; }
+    section { width: 90%; max-width: 40rem; margin: 0 auto; }
+    h1 { font-size: 3rem; }
+    h3 { font-size: 1rem; }
+    .chat-prompt { display: block; font-size: 3rem; background-color: #abcdef; color: #fff; padding: .25rem; text-align: center; border-radius: .2rem; box-shadow: 5px 5px 0 0 #fff; text-decoration: none;}
+    .chat-prompt:hover { box-shadow: 15px 15px 0 0 #fff; }
+
+  </style>
 </head>
 <body>
-	{{{body}}}
-	<div class="fb-messengermessageus"
-		messenger_app_id="{{ fbMessengerAppId }}"
-		page_id="{{ fbPageId }}"
-		color="blue"
-		size="standard">
-	</div>
-	<script>
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId: {{ fbMessengerAppId }},
-				xfbml: true,
-				version: 'v2.6'
-			});
-		};
-		(function(d, s, id){
-			 var js, fjs = d.getElementsByTagName(s)[0];
-			 if (d.getElementById(id)) {return;}
-			 js = d.createElement(s); js.id = id;
-			 js.src = "//connect.facebook.net/en_US/sdk.js";
-			 fjs.parentNode.insertBefore(js, fjs);
-		 }(document, 'script', 'facebook-jssdk'));
-	</script>
+  {{{body}}}
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: {{ fbMessengerAppId }},
+        xfbml: true,
+        version: 'v2.6'
+      });
+    };
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
 </body>
 </html>
