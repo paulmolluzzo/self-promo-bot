@@ -301,13 +301,8 @@ const botMethods = {
     }, {
       title: `SVGZus`,
       subtitle: `Pop culture coloring book`,
-      item_url: `http://svgz.us/`,
       image_url: `${config.SERVER_URL}/assets/svgzus.jpg`,
       buttons: [{
-        type: 'web_url',
-        url: `http://svgz.us/`,
-        title: 'Make Some Color Pop'
-      }, {
         type: 'postback',
         title: 'View Tech Stack',
         payload: `Meteor, jQuery, Web Canvas, and AWS`
