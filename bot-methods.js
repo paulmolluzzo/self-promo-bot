@@ -559,6 +559,12 @@ const botMethods = {
 
     winston.info('Received postback for user %d and page %d with payload %s at %d', senderID, recipientID, payload, timeOfPostback);
 
+    if (payload === 'clicked_getting_started') {
+      return this.sendTextMessage(senderID, `Paul is a web developer specializing in e-commerce and interactive web development. I am his pet chatbot. 😎`, 1000).then(() => {
+        return this.sendQuickOptions(senderID);
+      });
+    }
+
     // When a postback is called, we'll send a message back to the sender to
     // let them know it was successful
     this.sendTextMessage(senderID, `This site was built with ${payload}`);
