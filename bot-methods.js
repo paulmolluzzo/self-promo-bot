@@ -51,7 +51,7 @@ const botMethods = {
 
     if (this.checkMessage('contact|reach', messageText)) {
       return this.sendTextMessage(senderID, `My email address is paul@molluzzo.com`, 3000).then(() => {
-        this.sendContactInfo(senderID, undefined, 3000).then(() => {
+        this.sendContactInfo(senderID, 'Or you can call/tweet me.', 3000).then(() => {
           this.sendWebPresence(senderID, undefined, 3000);
         });
       }).catch(err => {
