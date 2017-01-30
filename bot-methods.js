@@ -107,7 +107,9 @@ const botMethods = {
     }
 
     winston.warn('Unhandled message: %s', messageText);
-    return this.sendTextMessage(senderID, `That's a new one. I'll ask Paul to add an answer. In the meantime maybe ask for help?`, 1000);
+    return this.sendTextMessage(senderID, `That's a new one. I'll ask Paul to add an answer. In the meantime maybe ask for help?`, 1000).then(() => {
+      return this.sendQuickOptions(senderID);
+    });
   },
 
   receivedAuthentication(event) {
