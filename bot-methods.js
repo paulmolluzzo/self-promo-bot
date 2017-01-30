@@ -62,9 +62,11 @@ const botMethods = {
     }
 
     if (this.checkMessage('email', messageText)) {
-      return this.sendTextMessage(senderID, `📧: paul@molluzzo.com`, 1000).then(() => {
-        return this.sendContactInfo(senderID, undefined, 3000);
-      });
+      return this.sendTextMessage(senderID, `My email is paul@molluzzo.com`, 1000);
+    }
+
+    if (this.checkMessage('phone', messageText)) {
+      return this.sendContactInfo(senderID, undefined, 3000, ['phone']);
     }
 
     if (this.checkMessage('tech|stack|software', messageText)) {
@@ -392,7 +394,28 @@ const botMethods = {
     this.sendGenericMessage(recipientId, projectList, delay);
   },
 
-  sendContactInfo(recipientId, message = `Or we can connect one of these ways:`, delay = 0) {
+  sendContactInfo(recipientId, message = `Here you go.`, delay = 0, infoTypesArray = ['phone', 'twitter']) {
+
+    const infoTypesButtons = [];
+
+    if (infoTypesArray.indexOf('phone') !== -1) {
+      infoTypesButtons.push({
+        type: `phone_number`,
+        payload: config.PHONE_NUMBER,
+        title: `Call Me`
+      });
+    }
+
+    if (infoTypesArray.indexOf('twitter') !== -1) {
+      infoTypesButtons.push({
+        type: `web_url`,
+        url: `https://twitter.com/paulmolluzzo`,
+        title: `Twitter`
+      });
+    }
+
+    console.log(infoTypesButtons);
+
     const messageData = {
       recipient: {
         id: recipientId
@@ -403,18 +426,7 @@ const botMethods = {
           payload: {
             template_type: 'button',
             text: message,
-            buttons: [
-              {
-                type: `web_url`,
-                url: `https://twitter.com/paulmolluzzo`,
-                title: `Twitter`
-              },
-              {
-                type: `phone_number`,
-                payload: config.PHONE_NUMBER,
-                title: `Call Me`
-              }
-            ]
+            buttons: infoTypesButtons
           }
         }
       }
