@@ -189,7 +189,27 @@ const botMethods = {
 * Have you done any open source?
 * Can I see a list of work you've done?
 * Have any cool projects worth checking out?
-* What technologies have you used?`
+* What technologies have you used?`,
+        quick_replies:[{
+          content_type:'text',
+          title:'Get contact info',
+          payload:`Get contact info`
+        },
+        {
+          content_type:'text',
+          title:'See OSS work',
+          payload:`See OSS work`
+        },
+        {
+          content_type:'text',
+          title:'See paid work',
+          payload:`See paid work`
+        },
+        {
+          content_type:'text',
+          title:`Tech I've worked with`,
+          payload:`Tech I've worked with`
+        }]
       }
     };
 
