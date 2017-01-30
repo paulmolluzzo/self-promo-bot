@@ -227,7 +227,7 @@ const botMethods = {
         id: recipientId
       },
       message: {
-        text: `Try one of these options:`,
+        text: `Here are some options you can try:`,
         quick_replies: [{
           content_type: 'text',
           title: 'Get contact info',
