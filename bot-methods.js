@@ -212,8 +212,8 @@ const botMethods = {
           },
           {
             content_type: 'text',
-            title: `Tech I've worked with`,
-            payload: `Tech I've worked with`
+            title: `See Tech Skills`,
+            payload: `See Tech Skills`
           }]
       }
     };
@@ -245,8 +245,8 @@ const botMethods = {
           },
           {
             content_type: 'text',
-            title: `Tech I've worked with`,
-            payload: `Tech I've worked with`
+            title: `See Tech Skills`,
+            payload: `See Tech Skills`
           }]
       }
     };
