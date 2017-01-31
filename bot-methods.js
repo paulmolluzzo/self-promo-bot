@@ -56,7 +56,9 @@ const botMethods = {
         });
       }).catch(err => {
         winston.error(err);
-        return this.sendTextMessage(senderID, `I think you broke something! 😲 Try again or ask for help.`);
+        return this.sendTextMessage(senderID, `I think you broke something! 😲 Try again or ask for help.`).then(() => {
+          return this.sendQuickOptions(senderID);
+        });
       });
     }
 
