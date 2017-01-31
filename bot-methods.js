@@ -451,8 +451,6 @@ const botMethods = {
       });
     }
 
-    console.log(infoTypesButtons);
-
     const messageData = {
       recipient: {
         id: recipientId
