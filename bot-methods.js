@@ -234,22 +234,19 @@ const botMethods = {
           content_type: 'text',
           title: 'Get contact info',
           payload: `Get contact info`
-        },
-          {
-            content_type: 'text',
-            title: 'See OSS work',
-            payload: `See OSS work`
-          },
-          {
-            content_type: 'text',
-            title: 'See paid work',
-            payload: `See paid work`
-          },
-          {
-            content_type: 'text',
-            title: `See Tech Skills`,
-            payload: `See Tech Skills`
-          }]
+        },{
+          content_type: 'text',
+          title: 'See OSS work',
+          payload: `See OSS work`
+        },{
+          content_type: 'text',
+          title: 'See paid work',
+          payload: `See paid work`
+        },{
+          content_type: 'text',
+          title: `See Tech Skills`,
+          payload: `See Tech Skills`
+        }]
       }
     };
 
