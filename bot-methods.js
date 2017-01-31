@@ -78,7 +78,15 @@ const botMethods = {
 
     if (this.checkMessage('oss|open source', messageText)) {
       return this.sendTextMessage(senderID, `Paul loves OSS! He's built or contributed to a bunch of cool open source things, and keeps his eyes open for new stuff the community is building. Here are a few worth poking at:`, 2000).then(() => {
-        return this.sendProjectsMessage(senderID, ['open-source'], 3000);
+        return this.sendProjectsMessage(senderID, ['open-source'], 3000, [{
+          content_type: 'text',
+          title: 'See paid work',
+          payload: `See paid work`
+        },{
+          content_type: 'text',
+          title: `See Tech Skills`,
+          payload: `See Tech Skills`
+        }]);
       });
     }
 
@@ -274,7 +282,7 @@ const botMethods = {
     });
   },
 
-  sendGenericMessage(recipientId, elements, delay = 0) {
+  sendGenericMessage(recipientId, elements, delay = 0, quickReplies) {
     const messageData = {
       recipient: {
         id: recipientId
@@ -286,7 +294,8 @@ const botMethods = {
             template_type: 'generic',
             elements: elements
           }
-        }
+        },
+        quick_replies: quickReplies
       }
     };
 
@@ -295,7 +304,7 @@ const botMethods = {
     });
   },
 
-  sendProjectsMessage(recipientId, projectTypes, delay = 0) {
+  sendProjectsMessage(recipientId, projectTypes, delay = 0, quickReplies = []) {
     const projectList = [];
 
     const workProjects = [{
@@ -426,7 +435,7 @@ const botMethods = {
       projectList.push(...ossProjects);
     }
 
-    this.sendGenericMessage(recipientId, projectList, delay);
+    this.sendGenericMessage(recipientId, projectList, delay, quickReplies);
   },
 
   sendContactInfo(recipientId, message = `Here you go.`, delay = 0, infoTypesArray = ['phone', 'twitter']) {
