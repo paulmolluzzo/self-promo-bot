@@ -92,13 +92,29 @@ const botMethods = {
 
     if (this.checkMessage('work', messageText)) {
       return this.sendTextMessage(senderID, `Paul has a bunch of paid work he's proud of (and he's always looking for new projects 😉). Here are some that come to mind:`, 2000).then(() => {
-        return this.sendProjectsMessage(senderID, ['work'], 3000);
+        return this.sendProjectsMessage(senderID, ['work'], 3000, [{
+          content_type: 'text',
+          title: 'View Contact Info',
+          payload: `View Contact Info`
+        }, {
+          content_type: 'text',
+          title: `See Tech Skills`,
+          payload: `See Tech Skills`
+        }]);
       });
     }
 
     if (this.checkMessage('projects', messageText)) {
       return this.sendTextMessage(senderID, `Here's a mix of paid work and OSS projects that you might like. Email Paul if any stand out for you.`, 2000).then(() => {
-        return this.sendProjectsMessage(senderID, ['work', 'open-source'], 3000);
+        return this.sendProjectsMessage(senderID, ['work', 'open-source'], 3000, [{
+          content_type: 'text',
+          title: 'View Contact Info',
+          payload: `View Contact Info`
+        }, {
+          content_type: 'text',
+          title: `See Tech Skills`,
+          payload: `See Tech Skills`
+        }]);
       });
     }
 
