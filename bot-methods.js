@@ -82,7 +82,7 @@ const botMethods = {
           content_type: 'text',
           title: 'See paid work',
           payload: `See paid work`
-        },{
+        }, {
           content_type: 'text',
           title: `See Tech Skills`,
           payload: `See Tech Skills`
@@ -127,7 +127,7 @@ const botMethods = {
     }
 
     if (this.checkMessage('hey', messageText)) {
-      return this.sendTextMessage(senderID, `Hey is for horses. 😂`, 1000).then(() =>{
+      return this.sendTextMessage(senderID, `Hey is for horses. 😂`, 1000).then(() => {
         return this.sendQuickOptions(senderID);
       });
     }
@@ -247,26 +247,26 @@ const botMethods = {
     return this.callSendAPI(messageData);
   },
 
-  sendQuickOptions(recipientId) {
+  sendQuickOptions(recipientId, text = `Here are some options you can try:`) {
     const messageData = {
       recipient: {
         id: recipientId
       },
       message: {
-        text: `Here are some options you can try:`,
+        text: text,
         quick_replies: [{
           content_type: 'text',
           title: 'Get contact info',
           payload: `Get contact info`
-        },{
+        }, {
           content_type: 'text',
           title: 'See OSS work',
           payload: `See OSS work`
-        },{
+        }, {
           content_type: 'text',
           title: 'See paid work',
           payload: `See paid work`
-        },{
+        }, {
           content_type: 'text',
           title: `See Tech Skills`,
           payload: `See Tech Skills`
