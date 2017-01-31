@@ -50,8 +50,8 @@ const botMethods = {
     }
 
     if (this.checkMessage('contact|reach', messageText)) {
-      return this.sendTextMessage(senderID, `My email address is paul@molluzzo.com`, 3000).then(() => {
-        this.sendContactInfo(senderID, 'Or you can call/tweet me.', 3000).then(() => {
+      return this.sendTextMessage(senderID, `Paul's email address is paul@molluzzo.com`, 3000).then(() => {
+        this.sendContactInfo(senderID, 'Or you can call/tweet him.', 3000).then(() => {
           this.sendWebPresence(senderID, undefined, 3000);
         });
       }).catch(err => {
@@ -61,7 +61,7 @@ const botMethods = {
     }
 
     if (this.checkMessage('email', messageText)) {
-      return this.sendTextMessage(senderID, `My email is paul@molluzzo.com`, 1000);
+      return this.sendTextMessage(senderID, `Paul's email is paul@molluzzo.com`, 1000);
     }
 
     if (this.checkMessage('phone', messageText)) {
@@ -75,19 +75,19 @@ const botMethods = {
     }
 
     if (this.checkMessage('oss|open source', messageText)) {
-      return this.sendTextMessage(senderID, `I love OSS! I've built or contributed to a bunch of cool open source things, and try to keep my eyes open for new stuff the community is building. If you have a neat project LMK! Here are a few worth poking at:`, 2000).then(() => {
+      return this.sendTextMessage(senderID, `Paul loves OSS! He's built or contributed to a bunch of cool open source things, and keeps his eyes open for new stuff the community is building. Here are a few worth poking at:`, 2000).then(() => {
         return this.sendProjectsMessage(senderID, ['open-source'], 3000);
       });
     }
 
     if (this.checkMessage('work', messageText)) {
-      return this.sendTextMessage(senderID, `I have a bunch of paid work that I'm proud of (and I'm always looking for new projects 😉). Here are some that come to mind:`, 2000).then(() => {
+      return this.sendTextMessage(senderID, `Paul has a bunch of paid work he's proud of (and he's always looking for new projects 😉). Here are some that come to mind:`, 2000).then(() => {
         return this.sendProjectsMessage(senderID, ['work'], 3000);
       });
     }
 
     if (this.checkMessage('projects', messageText)) {
-      return this.sendTextMessage(senderID, `Here's a mix of paid work and OSS projects that you might like. LMK if any stand out for you.`, 2000).then(() => {
+      return this.sendTextMessage(senderID, `Here's a mix of paid work and OSS projects that you might like. Email Paul if any stand out for you.`, 2000).then(() => {
         return this.sendProjectsMessage(senderID, ['work', 'open-source'], 3000);
       });
     }
@@ -97,7 +97,7 @@ const botMethods = {
     }
 
     if (this.checkMessage('sign|astrology|astrological|zodiac|Aries|Taurus|Gemini|Cancer|Leo|Virgo|Libra|Scorpio|Sagittarius|Capricorn|Aquarius|Pisces', messageText)) {
-      return this.sendTextMessage(senderID, `I'm on the cusp of Leo and Virgo. 😉`, 1000);
+      return this.sendTextMessage(senderID, `Paul's on the cusp of Leo and Virgo. 😉`, 1000);
     }
 
     if (this.checkMessage('hey', messageText)) {
@@ -189,7 +189,7 @@ const botMethods = {
         id: recipientId
       },
       message: {
-        text: `Need some help, huh? This bot isn't super smart (it's just regex TBH), but you can try sending messages like:
+        text: `Need some help, huh? You can try sending messages like:
 * What's your contact info?
 * Have you done any open source?
 * Can I see a list of work you've done?
@@ -472,7 +472,7 @@ const botMethods = {
     });
   },
 
-  sendWebPresence(recipientId, message = `You can also view more info about me here:`, delay = 0) {
+  sendWebPresence(recipientId, message = `You can also view more info about Paul here:`, delay = 0) {
     const messageData = {
       recipient: {
         id: recipientId
@@ -516,12 +516,11 @@ const botMethods = {
         id: recipientId
       },
       message: {
-        text: `I've worked with the following tech:
+        text: `Paul's worked with the following tech:
 * Frontend- HTML5, CSS3, SASS/SCSS/LESS, JS, Angular 1, jQuery
 * Backend & CMS - Ruby on Rails, PHP, Node, WordPress, Shopify, Drupal 7
 * Servers & PaaS: Apache, Ubuntu, AWS (S3, EC2, CloudFront, IAM), Heroku
-* Source Control - Git, SVN
-* APIs: Facebook, Twitter, USPS/Endicia, Vimeo`
+* Source Control - Git, SVN`
       }
     };
 
