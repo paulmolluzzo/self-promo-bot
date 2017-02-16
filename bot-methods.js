@@ -4,6 +4,7 @@ const winston = require('winston');
 const rp = require('request-promise-native');
 const promiseDelay = require('promise-delay');
 const config = require('./config');
+const userReminders = require('./user-reminders');
 
 const botMethods = {
   checkMessage(pattern, msg) {
@@ -19,6 +20,9 @@ const botMethods = {
     const isEcho = message.is_echo;
     const msgSticker = message.sticker_id;
     const likeStickerID = 369239263222822;
+
+    // find or create a user for future reminders
+    userReminders.findOrCreateUser(senderID);
 
     if (isEcho) {
       return;
@@ -549,6 +553,22 @@ const botMethods = {
     return this.sendTypingOn(recipientId).then(() => {
       return promiseDelay(delay, this.callSendAPI(messageData));
     });
+  },
+
+  sendReminderTextMessage(recipientId) {
+    const messageData = {
+      recipient: {
+        id: recipientId
+      },
+      message: {
+        text: `Did you know you can send your own questions too? You can try sending messages like:
+* What is Paul's phone number?
+* Has Paul done any open source code?
+* Can I see a list of Paul's skills?`
+      }
+    };
+
+    return this.callSendAPI(messageData);
   },
 
   sendGifMessage(recipientId) {

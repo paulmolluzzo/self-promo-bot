@@ -10,7 +10,13 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const winston = require('winston');
 const papertrail = require('winston-papertrail').Papertrail; // eslint-disable-line no-unused-vars
+const mongoose = require('mongoose');
 const config = require('./config');
+const botMethods = require('./bot-methods');
+const userReminders = require('./user-reminders');
+
+// connect to MongoDB
+mongoose.connect(process.env.MONGO_DB_URL);
 
 // init express
 const app = express();
@@ -64,5 +70,14 @@ if (!(config.APP_SECRET && config.VALIDATION_TOKEN && config.PAGE_ACCESS_TOKEN &
   winston.error('Missing config values');
   throw new Error('Missing config values');
 }
+
+// remind users who were created more than 1 day ago
+setInterval(() => {
+  userReminders.findUsersToRemind(usersToRemind => {
+    usersToRemind.forEach(user => {
+      return botMethods.sendReminderTextMessage(user.senderID).then(() => userReminders.markUserReminded(user));
+    });
+  });
+}, (5 * 60 * 1000));
 
 module.exports = app;
