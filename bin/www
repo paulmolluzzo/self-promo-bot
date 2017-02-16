@@ -8,6 +8,6 @@ const routes = require('../routes');
 app.set('port', process.env.PORT || 3000);
 
 // start server
-const server = app.listen(app.get('port'), function() {
-	debug('Express server listening on port ' + server.address().port);
+const server = app.listen(app.get('port'), () => {
+  debug('Express server listening on port ' + server.address().port);
 });

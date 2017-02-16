@@ -26,9 +26,9 @@ app.post('/webhook', (req, res) => {
   const data = req.body;
 
   if (data.object === 'page') {
-		// loop all entries
+    // loop all entries
     data.entry.forEach(pageEntry => {
-			// Iterate over each messaging event
+      // Iterate over each messaging event
       pageEntry.messaging.forEach(messagingEvent => {
         if (messagingEvent.optin) {
           botMethods.receivedAuthentication(messagingEvent);
