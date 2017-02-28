@@ -54,7 +54,7 @@ const botMethods = {
     }
 
     if (this.checkMessage('contact|reach', messageText)) {
-      return this.sendTextMessage(senderID, `Paul's email address is paul@molluzzo.com`, 3000).then(() => {
+      return this.sendTextMessage(senderID, `Pauls email address is paul@molluzzo.com`, 3000).then(() => {
         this.sendContactInfo(senderID, 'Or you can call/tweet him.', 3000).then(() => {
           this.sendWebPresence(senderID, undefined, 3000);
         });
@@ -67,7 +67,7 @@ const botMethods = {
     }
 
     if (this.checkMessage('email', messageText)) {
-      return this.sendTextMessage(senderID, `Paul's email is paul@molluzzo.com`, 1000);
+      return this.sendTextMessage(senderID, `Pauls email is paul@molluzzo.com`, 1000);
     }
 
     if (this.checkMessage('phone', messageText)) {
@@ -562,9 +562,9 @@ const botMethods = {
       },
       message: {
         text: `Did you know you can send your own questions too? You can try sending messages like:
-* What is Paul's phone number?
+* What is Pauls phone number?
 * Has Paul done any open source code?
-* Can I see a list of Paul's skills?`
+* Can I see a list of Pauls skills?`
       }
     };
 
