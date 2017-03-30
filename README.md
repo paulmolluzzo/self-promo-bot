@@ -2,7 +2,7 @@
 
 This is a self promo FB Messenger to make me cool on the internet.
 
-![](./public/assets/robot.gif)
+![](./public/assets/chatbot.gif)
 
 ---
 
